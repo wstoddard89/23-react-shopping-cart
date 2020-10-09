@@ -17,6 +17,10 @@ body {
   justify-content: flex-end;
 }
 
+.filter-sidebar {
+  width: 15%;
+}
+
 .container {
   display: flex;
   width: 85%;
@@ -30,29 +34,90 @@ body {
 }
 
 .product-list-item {
-  height: 500px;
+  height: 565px;
   width: 25%;
   padding: 10px;
   margin-bottom: 30px;
   background-position-y: 10px;
-  background-size: 90%;
+  background-size: 100%;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   text-align: center;
+  position: relative;
+  border: solid 1px transparent;
+}
+
+.product-list-item:hover {
+  cursor: pointer;
+  border: 1px solid #eee;
+}
+
+/* BUTTON COLOR CHANGE WHEN HOVER OVER LIST-ITEM */
+.product-list-item:hover .cart-btn {
+  background-color: #eabf00;
+}
+
+.free-shipping {
+  height: 20px;
+  width: 33%;
+  background-color: black;
+  color: #ececec;
+  font-size: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2px;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .item-title {
-  margin-bottom: 30px;
+  height: 45px;
+  padding: 0 20px;
+  margin: 10px 0;
+  position: relative;
+}
+
+/* PSEUDO-CLASS TO CREATE SMALL YELLOW LINE UNDER TITLE */
+.item-title:before {
+  content: "";
+  width: 20px;
+  height: 2px;
+  background-color: #eabf00;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -10px;
 }
 
 .item-price {
-  margin-bottom: 30px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .cart-btn {
   padding: 15px 0;
   background-color: #1b1a20;
   color: #fff;
+  font-size: 16px;
+  border: none;
+  margin-top: 10px;
+}
+
+.dollar-sign {
+  font-size: 80%;
+}
+
+.installments {
+  color: #9c9b9b;
+
+}
+
+.installments-price {
+  font-weight: bold;
 }
