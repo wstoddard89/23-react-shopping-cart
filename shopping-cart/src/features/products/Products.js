@@ -123,6 +123,7 @@ export function Products() {
                     <div className="item-description">
                       <p>{item.title}</p>
                       <p className="item-style">{item.style}</p>
+                <p>Quantity:{item.quantity}</p>
                     </div>
                     <div className="cart-item-price">
                       <p>
