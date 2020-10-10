@@ -148,7 +148,7 @@ html {
 
 .free-shipping {
   height: 20px;
-  width: 33%;
+  width: 30%;
   background-color: black;
   color: #ececec;
   font-size: 9px;
@@ -226,11 +226,12 @@ html {
   color: white;
 }
 
-.float-cart button {
+.float-cart-btn {
   background: #1B1A20;
   border: none;
   color: white;
   cursor: pointer;
+  outline: none;
 }
 
 .hidden-cart {
@@ -240,6 +241,7 @@ html {
   right: -450px;
   position: fixed;
   background: #1B1A20;
+  transition: .4s;
 }
 
 .show-cart {
@@ -249,11 +251,12 @@ html {
   right: 0;
   position: fixed;
   background: #1B1A20;
+  transition: .4s;
 }
 
 .cart-content {
   height: 100%;
-  
+  overflow: scroll;
 }
 
 .cart-content-header {
@@ -383,4 +386,8 @@ html {
   margin-top: 40px;
   cursor: pointer;
   color: #ececec;
+}
+
+.checkout-btn:hover {
+  background-color: black;
 }

@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { getProducts, selectProducts } from "./productsSlice"
 import { selectCart, addItem, deleteItem } from "../cart/cartSlice.js"
 
-
-
 export function Products() {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
@@ -19,6 +17,10 @@ export function Products() {
     if (!cartHidden) {
       setCartHidden(true)
     }
+  }
+
+  function handleClick2() {
+    setCartHidden(false)
   }
 
   return (
@@ -100,10 +102,8 @@ export function Products() {
         </ul>
       </div>
       <div className={!cartHidden ? "show-cart" : "hidden-cart"}>
-        <div className="float-cart"
-              onClick={handleClick}>
-          <button>
-            {/* // onClick={(<div className="hidden-cart"></div>) ? (<div className="show-cart"></div>) : null }> */}
+        <div className="float-cart" onClick={handleClick}>
+          <button className='float-cart-btn'>
             <i class="far fa-shopping-cart fa-2x"></i>
           </button>
         </div>
@@ -113,34 +113,40 @@ export function Products() {
             <div className="cart-items-div">
               {cart.map((item) => {
                 return (
-                <div className="cart-items">
-                    
-                      <img className="item-image" src={item.img.thumb}></img>
-                  <div className="cart-item-delete"
-                        key={item.id}
-                        onClick={() => dispatch(deleteItem(item.id))}></div>
-                  <div className="item-description">
-                    <p>{item.title}</p>
-                    <p className="item-style">{item.style}</p>
-                  </div>
-                  <div className="cart-item-price">
-                    <p>{item.currencyFormat}{Math.floor(item.price.toFixed(2))}{item.price
-                    .toFixed(2)
-                    .toString()
-                    .slice(item.price.toFixed(2).toString().indexOf("."))}
-                    </p>
-                    <div>
-                      <button className="item-quantity-btn disabled">-</button>
-                      <button className="item-quantity-btn">+</button>
+                  <div className="cart-items">
+                    <img className="item-image" src={item.img.thumb}></img>
+                    <div
+                      className="cart-item-delete"
+                      key={item.id}
+                      onClick={() => dispatch(deleteItem(item.id))}
+                    ></div>
+                    <div className="item-description">
+                      <p>{item.title}</p>
+                      <p className="item-style">{item.style}</p>
+                    </div>
+                    <div className="cart-item-price">
+                      <p>
+                        {item.currencyFormat}
+                        {Math.floor(item.price.toFixed(2))}
+                        {item.price
+                          .toFixed(2)
+                          .toString()
+                          .slice(item.price.toFixed(2).toString().indexOf("."))}
+                      </p>
+                      <div>
+                        <button className="item-quantity-btn disabled">
+                          -
+                        </button>
+                        <button className="item-quantity-btn">+</button>
+                      </div>
                     </div>
                   </div>
-                </div>
                 )
               })}
             </div>
             <p className="cart-empty">
               Add some products in the cart<br></br>
-              <br></br>:)
+              <br></br>:{")"}
             </p>
           </div>
           <div className="cart-total-container">
@@ -153,5 +159,6 @@ export function Products() {
         </div>
       </div>
     </div>
+  
   )
 }
