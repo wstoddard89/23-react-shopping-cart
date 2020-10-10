@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getProducts, selectProducts } from "./productsSlice"
-import { selectCart, addItem } from "../cart/cartSlice.js"
+import { selectCart, addItem, deleteItem } from "../cart/cartSlice.js"
+
+
 
 export function Products() {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const cart = useSelector(selectCart)
-
+  const [cartHidden, setCartHidden] = useState(true)
   useEffect(() => {
     dispatch(getProducts())
   }, [])
 
-  // function handleClick() {
-
-  // }
+  function handleClick() {
+    setCartHidden(false)
+    if (!cartHidden) {
+      setCartHidden(true)
+    }
+  }
 
   return (
     <div className="main-container">
@@ -94,8 +99,9 @@ export function Products() {
           ))}
         </ul>
       </div>
-      <div className="show-cart">
-        <div className="float-cart">
+      <div className={!cartHidden ? "show-cart" : "hidden-cart"}>
+        <div className="float-cart"
+              onClick={handleClick}>
           <button>
             {/* // onClick={(<div className="hidden-cart"></div>) ? (<div className="show-cart"></div>) : null }> */}
             <i class="far fa-shopping-cart fa-2x"></i>
@@ -110,7 +116,9 @@ export function Products() {
                 <div className="cart-items">
                     
                       <img className="item-image" src={item.img.thumb}></img>
-                  <div className="cart-item-delete"></div>
+                  <div className="cart-item-delete"
+                        key={item.id}
+                        onClick={() => dispatch(deleteItem(item.id))}></div>
                   <div className="item-description">
                     <p>{item.title}</p>
                     <p className="item-style">{item.style}</p>
