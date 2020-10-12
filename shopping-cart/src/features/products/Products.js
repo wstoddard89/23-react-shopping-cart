@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getProducts, selectProducts } from "./productsSlice"
-import { selectCart, addItem, deleteItem } from "../cart/cartSlice.js"
+import { selectCart, addItem, deleteItem, addQuantity, subtractQuantity } from "../cart/cartSlice.js"
 
 export function Products() {
   const dispatch = useDispatch()
   const products = useSelector(selectProducts)
   const cart = useSelector(selectCart)
+  console.log(cart)
   const [cartHidden, setCartHidden] = useState(true)
   useEffect(() => {
     dispatch(getProducts())
@@ -19,9 +20,9 @@ export function Products() {
     }
   }
 
-  function handleClick2() {
-    setCartHidden(false)
-  }
+  // function handleClick2() {
+  //   setCartHidden(false)
+  // }
 
   return (
     <div className="main-container">
@@ -38,7 +39,7 @@ export function Products() {
         <button className="size-buttons">XXL</button>
         <div className="star-review-container">
           <p className="star-review">
-            Leave a star on Github if this repository was useful :)
+            Leave a star on Github if this repository was useful :{")"}
           </p>
           <div className="star-btn">
             <a className="star-widget" href="#">
@@ -123,29 +124,30 @@ export function Products() {
                     <div className="item-description">
                       <p>{item.title}</p>
                       <p className="item-style">{item.style}</p>
-                <p>Quantity:{item.quantity}</p>
+                      <p className="item-quantity">Quantity:{item.quantity}</p>
                     </div>
                     <div className="cart-item-price">
                       <p>
                         {item.currencyFormat}
-                        {Math.floor(item.price.toFixed(2))}
+                        {Math.floor(item.price * item.quantity.toFixed(2))}
                         {item.price
                           .toFixed(2)
                           .toString()
                           .slice(item.price.toFixed(2).toString().indexOf("."))}
                       </p>
                       <div>
-                        <button className="item-quantity-btn disabled">
+                        <button onClick={ item.quantity === 1 ? null : () => dispatch(subtractQuantity(item))} 
+                        className={item.quantity > 1 ? "item-quantity-btn" : "item-quantity-btn disabled"}>
                           -
                         </button>
-                        <button className="item-quantity-btn">+</button>
+                        <button onClick={() => dispatch(addQuantity(item))} className="item-quantity-btn">+</button>
                       </div>
                     </div>
                   </div>
                 )
               })}
             </div>
-            <p className="cart-empty">
+            <p className={cart.length >= 1 ? "cart-not-empty" : "cart-empty"}>
               Add some products in the cart<br></br>
               <br></br>:{")"}
             </p>
@@ -153,7 +155,11 @@ export function Products() {
           <div className="cart-total-container">
             <div className="subtotal">SUBTOTAL</div>
             <div className="subtotal-price">
-              <p>$ 0.00</p>
+              <p>$0.00
+                {/* {cart.map((item) => {
+                return 
+              })} */}
+              </p>
             </div>
             <div className="checkout-btn">CHECKOUT</div>
           </div>

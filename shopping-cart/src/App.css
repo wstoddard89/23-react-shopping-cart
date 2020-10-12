@@ -273,6 +273,10 @@ html {
   min-height: 280px;
 }
 
+.cart-not-empty {
+  color: #1B1A20;
+}
+
 .cart-items {
   position: relative;
   color: white;
@@ -319,6 +323,10 @@ html {
   color: #5B5A5E;
 }
 
+.item-quantity {
+  color: #5B5A5E;
+}
+
 .cart-item-price {
   color: #eabf00;
   text-align: right;
@@ -334,6 +342,8 @@ html {
   width: 25px;
   height: 25px;
   margin-top: 15px;
+  outline: none;
+  cursor: pointer;
 }
 
 .disabled {
