@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getProducts, selectProducts } from "./productsSlice"
-import { selectCart, addItem, deleteItem, addQuantity, subtractQuantity } from "../cart/cartSlice.js"
+import {
+  selectCart,
+  addItem,
+  deleteItem,
+  addQuantity,
+  subtractQuantity,
+} from "../cart/cartSlice.js"
 
 export function Products() {
   const dispatch = useDispatch()
@@ -20,8 +26,12 @@ export function Products() {
     }
   }
 
-  // function handleClick2() {
-  //   setCartHidden(false)
+  function handleClick2() {
+    setCartHidden(false)
+  }
+
+  // function sum(a, b) {
+  //   return a + b
   // }
 
   return (
@@ -97,14 +107,16 @@ export function Products() {
                   </span>
                 </div>
               </div>
-              <button className="cart-btn">Add to cart</button>
+              <button onClick={handleClick2} className="cart-btn">
+                Add to cart
+              </button>
             </li>
           ))}
         </ul>
       </div>
       <div className={!cartHidden ? "show-cart" : "hidden-cart"}>
         <div className="float-cart" onClick={handleClick}>
-          <button className='float-cart-btn'>
+          <button className="float-cart-btn">
             <i class="far fa-shopping-cart fa-2x"></i>
           </button>
         </div>
@@ -136,11 +148,26 @@ export function Products() {
                           .slice(item.price.toFixed(2).toString().indexOf("."))}
                       </p>
                       <div>
-                        <button onClick={ item.quantity === 1 ? null : () => dispatch(subtractQuantity(item))} 
-                        className={item.quantity > 1 ? "item-quantity-btn" : "item-quantity-btn disabled"}>
+                        <button
+                          onClick={
+                            item.quantity === 1
+                              ? null
+                              : () => dispatch(subtractQuantity(item))
+                          }
+                          className={
+                            item.quantity > 1
+                              ? "item-quantity-btn"
+                              : "item-quantity-btn disabled"
+                          }
+                        >
                           -
                         </button>
-                        <button onClick={() => dispatch(addQuantity(item))} className="item-quantity-btn">+</button>
+                        <button
+                          onClick={() => dispatch(addQuantity(item))}
+                          className="item-quantity-btn"
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -155,10 +182,8 @@ export function Products() {
           <div className="cart-total-container">
             <div className="subtotal">SUBTOTAL</div>
             <div className="subtotal-price">
-              <p>$0.00
-                {/* {cart.map((item) => {
-                return 
-              })} */}
+              <p>
+                $0.00
               </p>
             </div>
             <div className="checkout-btn">CHECKOUT</div>
@@ -166,6 +191,5 @@ export function Products() {
         </div>
       </div>
     </div>
-  
   )
 }
